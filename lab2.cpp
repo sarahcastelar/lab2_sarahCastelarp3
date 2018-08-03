@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <math.h>
 #define pi 3.1415926535897
+#include <iomanip>
 
 using std::cout;
 using std::endl;
@@ -51,8 +52,19 @@ void ejercicio1(){
 	primerX = ((-1*grado1) + sqrt((grado1*grado1)-(4*grado2*constante)))/(2*grado2);
 	segundaX = ((-1*grado1)- sqrt((grado1*grado1)-(4*grado2*constante)))/(2*grado2);
 	
+	if (primerX < 0){
+		primerX = primerX * -1;
+		cout<<"(x+"<<primerX<<")"<<endl;
+	}
+	else 
+		cout<<"(x"<<primerX*-1<<")"<<endl;
 
-	cout << "La respuesta es: x="<<primerX<<" y x="<<segundaX<<endl;	
+	if (segundaX < 0){
+		segundaX = segundaX * -1;
+		cout<<"(x+"<<segundaX<<")"<<endl;
+	}else
+		cout<<"(x"<<segundaX<<")"<<endl;
+	
 	delete[] arreglo;
 	
 	} else 
@@ -61,32 +73,61 @@ void ejercicio1(){
 
 void ejercicio2(){
 	
-	double grados, radianes;
+	long double grados, radianes;
 
 	cout << "Ingrese el angulo en grados: "<<endl;
 	cin >> grados;
 
 	//lo convierto en radianes
 	radianes = grados*(pi/180);
-	
-	int respuestaSeno = 0, respuestaCoseno = 0;
-	for (int i = 0; i < 100; i++){
-		int n = 2*i;
-		int n2 = 2*1 + 1;
+	cout<<"en radianes es: "<<radianes<<endl;
+		
+	long double respuestaSeno = radianes, respuestaCoseno = 1;
+	for (int  i = 1; i < 30; i++){
+		int n = 2*i, denominador1 = 2*i;
+		int n2 = 2*i + 1, denominador2 = 2*i+1;
 		
 		//este for calcula el factorial de n y n2 para la formula. 
 		for (int i = 1; i < n; i++){
 			n *= i;
+		}
+		
+		for (int i = 1; i < n2; i++){
 			n2 *= i;
 		}
-
-		respuestaSeno += ( pow(-1,i) * pow(radianes,(2*i+1) ) / n2);
-		respuestaCoseno += ( pow(-1,i) * pow(radianes,(2*i)) / n);
+		respuestaSeno +=  pow(-1,i) * pow(radianes,2*i+1) / n2;
+		respuestaCoseno +=  pow(-1,i) * pow(radianes,2*i) / n;
+		cout<<"rs: "<<respuestaSeno<<endl<<"rc: "<<respuestaCoseno<<endl;
 
 	}//fin for de serie
 
-//hacer el coso para imprimirlo si es int, pasarlo a int, y si es decimal pasarlo a dos decimales
+	cout <<"Respuesta en radianes de seno de "<<grados<<" ="<<respuestaSeno<<endl
+		<<"Respuesta en radianes de coseno de "<<grados<<" ="<<respuestaCoseno<<endl;
 
+
+}
+
+
+void TrianguloPascal(int n){
+//
+//•//
+//○//
+//
+// std::cout << std::setw(10);
+//  std::cout << 77 << std::endl;
+//
+	int espacios = n;	
+	for(int i = espacios; i > 0; i--){
+		cout<< std::setw(i);
+		for (int j = 1; j <= n; j++){
+			if (j%2 == 0)
+			       cout<<"○";
+			else 
+				cout<<"•";
+		}
+		cout<<endl;
+
+	}
 
 
 }
@@ -100,11 +141,14 @@ int main(){
 			break;
 			
 			case 2:
-			//	ejercicio2();
+				ejercicio2();
 			break;
 
 			case 3:
-			//	ejercicio3();
+				int n;
+				cout<<"Ingrese numero de lineas: "<<endl;
+				cin >> n;
+				TrianguloPascal(n);
 			break;
 		}
 	}
