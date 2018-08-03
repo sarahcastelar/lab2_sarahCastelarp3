@@ -83,29 +83,33 @@ void ejercicio2(){
 	cout<<"en radianes es: "<<radianes<<endl;
 		
 	long double respuestaSeno = radianes, respuestaCoseno = 1;
-	for (int  i = 1; i < 30; i++){
+	for (int  i = 1; i < 5; i++){
 		int n = 2*i, denominador1 = 2*i;
 		int n2 = 2*i + 1, denominador2 = 2*i+1;
 		
 		//este for calcula el factorial de n y n2 para la formula. 
-		for (int i = 1; i < n; i++){
-			n *= i;
+		for (int j = 1; j < n2; j++){
+			n2 *= j;
 		}
 		
-		for (int i = 1; i < n2; i++){
-			n2 *= i;
-		}
-		respuestaSeno +=  pow(-1,i) * pow(radianes,2*i+1) / n2;
-		respuestaCoseno +=  pow(-1,i) * pow(radianes,2*i) / n;
-		cout<<"rs: "<<respuestaSeno<<endl<<"rc: "<<respuestaCoseno<<endl;
+		respuestaSeno +=  (pow(-1,i) * pow(radianes,2*i+1)) / n2;
 
 	}//fin for de serie
 
-	cout <<"Respuesta en radianes de seno de "<<grados<<" ="<<respuestaSeno<<endl
+	for (int i = 1; i < 10; i++){
+		int n = 2*i, denominador1 = 2*i;
+		for (int j = 1; j < n; j++){
+		       n*=j;
+		}
+ 			
+		respuestaCoseno += ( pow(-1,i) * pow(radianes,2*i)) / n;
+	}
+cout <<"Respuesta en radianes de seno de "<<grados<<" ="<<respuestaSeno<<endl
 		<<"Respuesta en radianes de coseno de "<<grados<<" ="<<respuestaCoseno<<endl;
 
 
 }
+
 
 
 void TrianguloPascal(int n){
